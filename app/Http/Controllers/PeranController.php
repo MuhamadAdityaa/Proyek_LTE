@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Peran;
+use App\Models\{
+    Peran,
+    casts,
+    Film
+    };
+use Illuminate\Http\Request;
 use App\Http\Requests\StorePeranRequest;
 use App\Http\Requests\UpdatePeranRequest;
 
@@ -11,9 +16,12 @@ class PeranController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $casts = casts::all();
+        $film = Film::find($id);
+        // $perans = Peran::where('films_id', $id)->get();
+        return view('content.peran.Peran', compact('casts', 'film'));
     }
 
     /**
@@ -27,9 +35,25 @@ class PeranController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePeranRequest $request)
+    public function storePeran(Request $request)
     {
+        // Validate the request data
+        // $request->validate([
+        //     'nama_peran' => 'required|exists:casts,id',
+        //     'film_id' => 'required|exists:films,id',
+        //     'pemeran' => 'required|string|max:255',
+        // ]);
+
+        // Create a new Peran instance and save it
         //
+        // dd($request->all());
+        Peran::create([
+            'casts_id' => $request->cast,
+            'films_id' => $request->film,
+            'nama' => $request->peran,
+        ]);
+
+        return redirect()->route('film.store.peran', $request->film)->with('success','Peran berhasil ditambahkan!');
     }
 
     /**

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     HomeController,
     FilmController,
+    PeranController,
 };
 use App\Http\Controllers\content\{
     AddCast,
@@ -32,6 +33,10 @@ Route::get('/film/edit/{id}', [FilmController::class, 'showedit'])->name('film.e
 Route::post('/film/store', [FilmController::class, 'store'])->name('film.store');
 Route::delete('/film/deletefilm/{id}', [FilmController::class, 'destroy'])->name('film.delete');
 Route::patch('/film/editfilm/{id}', [FilmController::class, 'edit'])->name('film.edit');
+Route::get('/film/detail/{id}', [FilmController::class, 'showDetail'])->name('film.detail');
+
+Route::get('/film/store/peran/{id}', [Perancontroller::class, 'index'])->name('film.store.peran');
+Route::post('/film/store/peran/create', [PeranController::class, 'storePeran'])->name('film.create.peran');
 
 
 Route::get('/coba', function () {

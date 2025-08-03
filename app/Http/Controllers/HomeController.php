@@ -40,6 +40,6 @@ class HomeController extends Controller
     public function casts()
     {
         $casts = casts::all();
-        return view('content.casts', compact('casts'));
+        return view('content.cast.casts', compact('casts'));
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\{
     Film,
     Genre,
+    Peran
 };
 use App\Http\Requests\StoreFilmRequest;
 use App\Http\Requests\UpdateFilmRequest;
@@ -21,7 +22,7 @@ class FilmController extends Controller
     {
         $genres = Genre::all();
         $films = Film::with('genre')->get();
-        return view('content.film', compact('films', 'genres'));
+        return view('content.film.Film', compact('films', 'genres'));
     }
 
     /**
@@ -31,7 +32,7 @@ class FilmController extends Controller
     {
         Film::with('genre')->get();
         $genres = Genre::all();
-        return view('content.aksi.insertFilm', compact('genres'));
+        return view('content.film.insertFilm', compact('genres'));
     }
 
     public function showedit($id)
@@ -42,7 +43,7 @@ class FilmController extends Controller
         }
         Film::with('genre')->get();
         $genres = Genre::all();
-        return view('content.aksi.editFilm', compact('film', 'genres'));
+        return view('content.film.editFilm', compact('film', 'genres'));
     }
 
     /**
@@ -138,6 +139,18 @@ class FilmController extends Controller
             return response()->json([
                 'message' => 'Cast not found.'
             ], 404);
+        }
+    }
+
+    public function showDetail($id){
+        Film::with('perans')->get();
+        $film = Film::find($id);
+        $perans = Peran::where('films_id', $id)->get();
+
+        if (!$film) {
+            return redirect()->route('film')->with('error', 'Film not found.');
+        } else {
+            return view('content.film.detailFilm', compact('film', 'perans'));
         }
     }
 }

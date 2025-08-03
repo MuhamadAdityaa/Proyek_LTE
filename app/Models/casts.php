@@ -22,7 +22,7 @@ class casts extends Model
 
     public function perans()
     {
-        return $this->hasMany(Peran::class);
+        return $this->hasMany(Peran::class , 'casts_id');
     }
     
 }
