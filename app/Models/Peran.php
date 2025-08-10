@@ -18,5 +18,5 @@ class Peran extends Model
     public function cast()
     {
         return $this->belongsTo(casts::class, 'casts_id');
-    }
+    } 
 }

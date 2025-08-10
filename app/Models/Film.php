@@ -24,6 +24,6 @@ class Film extends Model
 
     public function perans()
     {
-        return $this->hasMany(Peran::class, 'films_id');
+        return $this->hasMany(Peran::class, 'films_id'); 
     }
 }

@@ -25,9 +25,9 @@
                             <p><strong>Tahun:</strong>{{ $film->tahun }}</p>
                             <p><strong>Genre:</strong>{{ $film->genre->name }}</p>
                             <p><strong>Pemeran:</strong>
-                            @foreach ($perans as $peran)
+                            @foreach ($film->perans as $peran)
                                 <span class="badge bg-primary"> {{ $peran->cast->name }} sebagai
-                                    {{ $peran->nama }}</span>
+                                    {{ $peran->nama}}</span>
                                 
                             @endforeach
                             </p>

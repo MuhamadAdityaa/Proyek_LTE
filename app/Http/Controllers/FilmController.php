@@ -145,12 +145,11 @@ class FilmController extends Controller
     public function showDetail($id){
         Film::with('perans')->get();
         $film = Film::find($id);
-        $perans = Peran::where('films_id', $id)->get();
 
         if (!$film) {
             return redirect()->route('film')->with('error', 'Film not found.');
         } else {
-            return view('content.film.detailFilm', compact('film', 'perans'));
+            return view('content.film.detailFilm', compact('film'));
         }
     }
 }
