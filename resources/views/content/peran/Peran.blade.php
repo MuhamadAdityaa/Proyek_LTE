@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1>Daftar Peran</h1>
+    <h1>Mendaftarkan Peran Pada Film : {{ $film->judul }}</h1>
     <p>Selamat datang di halaman daftar peran!</p>
 @endsection
 
@@ -12,30 +12,14 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        {{-- Tampilkan error validasi --}}
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $error) 
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <form action="{{ route('film.create.peran') }}" method="POST" enctype="multipart/form-data"
             value="{{ $film->id }}">
             {{-- Tambahkan token CSRF untuk keamanan --}}
             @csrf
 
             <div class="form-group">
-                <label for="film">Film</label>
-
                 {{-- Ini yang dikirim ke backend --}}
-                <input type="hidden" name="film" value="{{ $film->id }}">
-
-                {{-- Ini hanya tampilan ke user --}}
-                <input type="text" class="form-control" value="{{ $film->judul }}" readonly>
+                <input id="film" type="hidden" name="film" value="{{ $film->id }}">
             </div>
 
             <div class="form-group">
@@ -43,23 +27,21 @@
                 <input id="peran" type="peran" class="form-control @error('peran') is-invalid @enderror"
                     name="peran" value="{{ old('peran') }}" autocomplete="peran">
                 @error('peran')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="form-group">
                 <label for="cast">Pemeran</label>
                 <select id="cast" class="form-control @error('cast') is-invalid @enderror" name="cast">
-                    <option value="">Pemeran</option>
+                    <option value="">-- Pilih Pemeran --</option>
                     @foreach ($casts as $cast)
-                        <option value="{{ $cast->id }}">{{ $cast->name }}</option>
+                        <option value="{{ $cast->id }}" {{ old('cast') == $cast->id ? 'selected' : '' }}>{{ $cast->name }}</option>
                     @endforeach
                 </select>
-                @error('tahun')
+                @error('cast')
                     <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
+                        <div class="alert alert-danger">{{ $message }}</div>
                     </span>
                 @enderror
             </div>

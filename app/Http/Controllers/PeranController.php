@@ -35,17 +35,8 @@ class PeranController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function storePeran(Request $request)
+    public function storePeran(StorePeranRequest $request)
     {
-        // Validate the request data
-        // $request->validate([
-        //     'nama_peran' => 'required|exists:casts,id',
-        //     'film_id' => 'required|exists:films,id',
-        //     'pemeran' => 'required|string|max:255',
-        // ]);
-
-        // Create a new Peran instance and save it
-        //
         // dd($request->all());
         Peran::create([
             'casts_id' => $request->cast,
