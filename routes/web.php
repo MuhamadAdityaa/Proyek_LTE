@@ -5,6 +5,7 @@ use App\Http\Controllers\{
     HomeController,
     FilmController,
     PeranController,
+    RegisterController,
 };
 use App\Http\Controllers\content\{
     AddCast,
@@ -16,7 +17,7 @@ use App\Http\Controllers\content\{
 //     return view('welcome');
 // });
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 route::get('/app', [HomeController::class, 'appk'])->name('appk');
@@ -37,3 +38,6 @@ Route::get('/film/detail/{id}', [FilmController::class, 'showDetail'])->name('fi
 
 Route::get('/film/store/peran/{id}', [Perancontroller::class, 'index'])->name('film.store.peran');
 Route::post('/film/store/peran/create', [PeranController::class, 'storePeran'])->name('film.create.peran');
+
+Route::get('/register', [RegisterController::class, 'create'])->name('auth.register');
+Route::post('/register/store', [RegisterConroller::class, 'store'])->name('auth.register.store');
