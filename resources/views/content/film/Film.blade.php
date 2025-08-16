@@ -36,7 +36,7 @@
                                         class="btn btn-danger">Hapus</button>
                                 </form>
                                 <a href="{{ route('film.detail', $film->id) }}" class="btn btn-info">Detail</a>
-                                <a href="{{ route('film.store.peran', $film->id) }}" class="btn btn-info">Peran</a>
+                                <a href="{{ route('film.store.peran', $film->id) }}" class="btn btn-info">+ Tambah Peran</a>
                             </td>
                         </tr>
                     @endforeach

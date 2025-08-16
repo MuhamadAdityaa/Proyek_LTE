@@ -37,9 +37,3 @@ Route::get('/film/detail/{id}', [FilmController::class, 'showDetail'])->name('fi
 
 Route::get('/film/store/peran/{id}', [Perancontroller::class, 'index'])->name('film.store.peran');
 Route::post('/film/store/peran/create', [PeranController::class, 'storePeran'])->name('film.create.peran');
-
-
-Route::get('/coba', function () {
-    return view('content.cpba');
-})->name('coba');
-
