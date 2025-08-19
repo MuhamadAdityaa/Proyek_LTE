@@ -6,6 +6,8 @@ use App\Http\Controllers\{
     FilmController,
     PeranController,
     RegisterController,
+    DashboardController,
+    AuthController,
 };
 use App\Http\Controllers\content\{
     AddCast,
@@ -19,7 +21,7 @@ use App\Http\Controllers\content\{
 
 // Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 route::get('/app', [HomeController::class, 'appk'])->name('appk');
 route::get('/welcome', [HomeController::class, 'welcome'])->name('welcome');
 
@@ -39,5 +41,13 @@ Route::get('/film/detail/{id}', [FilmController::class, 'showDetail'])->name('fi
 Route::get('/film/store/peran/{id}', [Perancontroller::class, 'index'])->name('film.store.peran');
 Route::post('/film/store/peran/create', [PeranController::class, 'storePeran'])->name('film.create.peran');
 
-Route::get('/register', [RegisterController::class, 'create'])->name('auth.register');
-Route::post('/register/store', [RegisterConroller::class, 'store'])->name('auth.register.store');
+Route::get('/login', [AuthController::class, 'login'])->name('login.login');
+Route::post('/login/authenticate', [AuthController::class, 'authenticate'])->name('login.authenticate');
+Route::post('/logout', [AuthController::class, 'logout'])->name('login.logout');
+
+
+Route::get('/register', [RegisterController::class, 'create'])->name('register');
+Route::post('/register/store', [RegisterController::class, 'store'])->name('register.store');
+
+Route::get('/dasboard/user', [DashboardController::class, 'User'])->name('dashboard.user');
+Route::get('/dashboard/admin', [DashboardController::class, 'Admin'])->name('dashboard.admin');
