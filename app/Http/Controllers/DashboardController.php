@@ -17,7 +17,7 @@ class DashboardController extends Controller
         ->withErrors([
             'notif' => 'You must be logged in to access the dashboard.',
         ])->onlyInput('email');
-    }
+    }   
 
     public function admin() {
         

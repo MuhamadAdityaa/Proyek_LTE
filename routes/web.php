@@ -50,9 +50,10 @@ Route::controller(FilmController::class)->group(function(){
     Route::get('/film/detail/{id}', 'showDetail')->name('film.detail');
 });
 
-Route::get('/film/store/peran/{id}', [Perancontroller::class, 'index'])->name('film.store.peran');
-Route::post('/film/store/peran/create', [PeranController::class, 'storePeran'])->name('film.create.peran');
-
+Route::controller(Perancontroller::class)->group(function(){
+    Route::get('/film/store/peran/{id}', 'index')->name('film.store.peran');
+    Route::post('/film/store/peran/create', 'storePeran')->name('film.create.peran');
+});
 
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
 Route::post('/register/store', [RegisterController::class, 'store'])->name('register.store');
